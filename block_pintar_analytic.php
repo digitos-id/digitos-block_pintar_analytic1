@@ -109,7 +109,7 @@ class block_pintar_analytic extends block_base {
         $this->content = new stdClass;
         $this->content->text = '';
         $this->content->footer = '';
-        $barinstances = array();
+        // $barinstances = array();
 
         // Guests do not have any progress. Don't show them the block.
         if (!isloggedin() or isguestuser()) {
