@@ -121,6 +121,7 @@ class block_pintar_analytic extends block_base {
             // if (!$this->prepare_dashboard_content($barinstances)) {
             //     return $this->content;
             // }
+            // Rencana untuk memilih category
             $this->content->text .= '<em>Report by Category</em><br><ul><li>Cat 1</li><li>Cat 2</li></ul>';
 
             return $this->content;
