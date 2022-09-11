@@ -130,13 +130,12 @@ class block_pintar_analytic extends block_base {
             // if (!$this->prepare_course_content($barinstances)) {
             //     return $this->content;
             // }
-
             $this->content->text .= 'Course Analytics<br>';
+            self::siapasaja_enroled_users(null);    
             $this->content->text .= '<a href="https://staging.pintartanoto.id/local/pintar_analytics/">Analytics 1</a> | ';
             $this->content->text .= '<a href="https://staging.pintartanoto.id/local/pintar_analytics/overview1.php">Analytics 2</a>';
             
         }
-
 
         return $this->content;
     }
@@ -166,5 +165,35 @@ class block_pintar_analytic extends block_base {
         }
     }
 
+/**
+     * Menampilkan user-user yang enroled pada course tersebut.
+     *
+     * @return list_of_enrolled_userid.
+     *   # Enroled users
+     *   # by Toosa
+     *  di awal hanya menampilkan course id nya saja
+     */
+    public static function siapasaja_enroled_users($courseid = null) {
+        global $COURSE;   // 
+      
+        if ($courseid=null) {
+            $courseid = $COURSE->id;
+        } else {
+            return true;
+        }
+
+        $context_course = context_course::instance($courseid);
+        $enrolled_users = get_enrolled_users($context_course,'',0,'*');
+        foreach ($enrolled_users as $enrolled_user) {
+                $this->content->text .= $enrolled_user->id.'<br>';
+                #echo "$enrolled_user";
+            }
+
+        
+            # end of Enroled users
+        
+        return true;
+        
+    }    
     
 }
