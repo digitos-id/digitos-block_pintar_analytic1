@@ -132,7 +132,7 @@ class block_pintar_analytic extends block_base {
             // }
             $this->content->text .= 'Course Analytics<br>';
             self::siapasaja_enroled_users(null);
-            $url = $_SERVER['HTTP_HOST'];    
+            $url = $CFG->wwwroot;    
             $this->content->text .= '<a href="'.$url.'/local/pintar_analytics/overview.php">Analytics local</a> | ';
             $this->content->text .= '<a href="'.$url.'/block/pintar_analytic/overview1.php">Analytics block</a>';
             
