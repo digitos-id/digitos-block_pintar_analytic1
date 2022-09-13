@@ -14,7 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-
+// require_once('../../../config.php'); //disesuaikan path nya
+// require_once('../../../completion/classes/external.php');//disesuaikan path nya
+require_once($CFG->wwwroot.'/completion/classes/external.php');
 /**
  * Pintar Analytic Dashboard block definition
  *
@@ -126,11 +128,40 @@ class block_pintar_analytic extends block_base {
 
             return $this->content;
         } else {
+            $this->content->text .= 'Course Analytics<br>';
+
+            // Hitung completion
+            $courseid = $COURSE->id;
+            $coursecontext = context_course::instance($courseid);
+            $enrolledstudents = get_enrolled_users($coursecontext, 'moodle/course:isincompletionreports');
+            $already70='';
+            $still30='';
+            foreach ($enrolledstudents as $user) {
+                $course_user_stat = core_completion_external::get_activities_completion_status($course->id,$user->id);
+                $activities = $course_user_stat['statuses'];
+                $totalactivities = count($activities);
+                $completed = 0;
+                foreach($activities as $activity){
+                        if($activity['timecompleted']!=0)$completed+=1;
+                }
+                $studentcompletion=($completed/$totalactivities)*100;
+                if($studentcompletion>70)$already70+=1;
+                else $still30 +=1;
+
+            }
+
+            // End of Hitung Completion
+
+            $this->content->text .= 'Diatas 70%:'.$already70."<br>";
+            $this->content->text .= 'Dibawah 30%:'.$still30."<br>";
+            
+
+
             // Gather content for block on regular course.
             // if (!$this->prepare_course_content($barinstances)) {
             //     return $this->content;
             // }
-            $this->content->text .= 'Course Analytics<br>';
+            
             //self::siapasaja_enroled_users(null);
             // $url = $CFG->wwwroot;
             $url = new moodle_url('/blocks/pintar_analytic/overview1.php');    
