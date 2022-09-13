@@ -131,13 +131,15 @@ class block_pintar_analytic extends block_base {
             //     return $this->content;
             // }
             $this->content->text .= 'Course Analytics<br>';
-            self::siapasaja_enroled_users(null);
-            $url = $CFG->wwwroot;    
-            $this->content->text .= '<a href="'.$url.'/local/pintar_analytics/overview.php">Analytics local</a> | ';
-            $this->content->text .= '<a href="'.$url.'/blocks/pintar_analytic/overview1.php">Analytics block</a>';
+            //self::siapasaja_enroled_users(null);
+            // $url = $CFG->wwwroot;
+            $url = new moodle_url('/blocks/pintar_analytic/overview1.php');    
+            $this->content->text .= '<a href="'.$url.'">Analytics block</a>';
+            $url = new moodle_url('/local/pintar_analytics/overview.php');    
+            $this->content->text .= '<a href="'.$url.'">Analytics local</a>';
             
         }
-
+// Notice: Trying to get property 'wwwroot' of non-object in /var/www/lms.digitos.id/blocks/pintar_analytic/block_pintar_analytic.php on line 135
         return $this->content;
     }
 
