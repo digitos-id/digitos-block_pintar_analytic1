@@ -133,7 +133,7 @@ class block_pintar_analytic extends block_base {
             $this->content->text .= 'Course Analytics<br>';
             self::siapasaja_enroled_users(null);    
             $this->content->text .= '<a href="https://lms.digitos.id/local/pintar_analytics/">Analytics 1</a> | ';
-            $this->content->text .= '<a href="https://lms.id/local/pintar_analytics/overview1.php">Analytics 2</a>';
+            $this->content->text .= '<a href="https://lms.digitos.id/block/pintar_analytics/overview1.php">Analytics 2</a>';
             
         }
 
