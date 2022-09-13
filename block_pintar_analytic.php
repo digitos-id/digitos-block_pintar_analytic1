@@ -131,9 +131,10 @@ class block_pintar_analytic extends block_base {
             //     return $this->content;
             // }
             $this->content->text .= 'Course Analytics<br>';
-            self::siapasaja_enroled_users(null);    
-            $this->content->text .= '<a href="https://lms.digitos.id/local/pintar_analytics/">Analytics 1</a> | ';
-            $this->content->text .= '<a href="https://lms.digitos.id/block/pintar_analytics/overview1.php">Analytics 2</a>';
+            self::siapasaja_enroled_users(null);
+            $url = $_SERVER['SERVER_NAME'];    
+            $this->content->text .= '<a href='.$url.'/local/pintar_analytics/">Analytics 1</a> | ';
+            $this->content->text .= '<a href='.$url.'/block/pintar_analytic/overview1.php">Analytics 2</a>';
             
         }
 
