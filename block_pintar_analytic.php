@@ -14,10 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-// require_once('../../../config.php'); //disesuaikan path nya
-// require_once('../../../completion/classes/external.php');//disesuaikan path nya
+// require_once('../../config.php'); //disesuaikan path nya
+require_once('../../completion/classes/external.php');//disesuaikan path nya
 //require_once($CFG->wwwroot.'/completion/classes/external.php');
-require_once dirname(dirname(dirname(FILE))).'/completion/classes/external.php);
+// require_once dirname(dirname(dirname(FILE))).'/completion/classes/external.php);
 /**
  * Pintar Analytic Dashboard block definition
  *
