@@ -15,7 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 // require_once('../../config.php'); //disesuaikan path nya
-require_once(@CFG->dirroot.'/completion/classes/external.php');//disesuaikan path nya
+
+require_once($CFG->dirroot.'/completion/classes/external.php');
+
 //require_once($CFG->wwwroot.'/completion/classes/external.php');
 // require_once dirname(dirname(dirname(FILE))).'/completion/classes/external.php);
 /**
