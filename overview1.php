@@ -68,7 +68,7 @@ $PAGE->set_url(new moodle_url('/block/pintar_analytic/overview1.php'));
 $PAGE->set_pagelayout('course');
 $PAGE->set_title($SITE->fullname);
 # $string['pluginname']='Greetings';
-$PAGE->set_heading(get_string('pluginname','block_pintar_analytics'));
+$PAGE->set_heading(get_string('pluginname','block_pintar_analytic'));
 
 echo $OUTPUT->header();
 
