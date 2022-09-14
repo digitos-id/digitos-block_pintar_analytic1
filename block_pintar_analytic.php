@@ -146,7 +146,7 @@ class block_pintar_analytic extends block_base {
             foreach ($enrolledstudents as $user) {
               //  $course_user_stat = core_completion_external::get_activities_completion_status($course->id,$user->id);
               //  $activities = $course_user_stat['statuses'];
-                $activities = $DB->get_records('course_modules', array('course' => $courseid));
+                $activities = $DB->get_records('course_modules', array('course' => $courseid, 'completion' => '1'));
                 $totalactivities = count($activities);
                 $completed = 0;
                 $iscomplete = false;
