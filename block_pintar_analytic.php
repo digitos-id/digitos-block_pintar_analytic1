@@ -145,18 +145,19 @@ class block_pintar_analytic extends block_base {
             $still30='';
             foreach ($enrolledstudents as $user) {
               //  $course_user_stat = core_completion_external::get_activities_completion_status($course->id,$user->id);
-              //  $activities = $course_user_stat['statuses'];
-                $activities = $DB->get_records('course_modules', array('course' => $courseid, 'completion' => '1'));
+                $course_user_stat = $this->custom_get_user_course_completion($courseid,$user->id);
+                $activities = $course_user_stat['statuses'];
+                // $activities = $DB->get_records('course_modules', array('course' => $courseid, 'completion' => '1'));
                 $totalactivities = count($activities);
                 $completed = 0;
                 $iscomplete = false;
                 foreach($activities as $activity){
-                    $ccinfo = new completion_info($activity);
+                    // $ccinfo = new completion_info($activity);
                     // var_dump($ccinfo);
                     // die();
-                    $iscomplete = $ccinfo->is_course_complete($user->id);
-                        // if($activity['timecompleted']!=0)$completed+=1;
-                    if($iscomplete)$completed+=1;
+                    // $iscomplete = $ccinfo->is_course_complete($user->id);
+                    if($activity['timecompleted']!=0)$completed+=1;
+                    // if($iscomplete)$completed+=1;
                 }
                 $studentcompletion=($completed/$totalactivities)*100;
                 if($studentcompletion>69)$already70+=1;
