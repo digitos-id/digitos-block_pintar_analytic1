@@ -172,18 +172,19 @@ class block_pintar_analytic extends block_base {
             $this->content->text .= 'Dibawah 30%:'.$still30."<br>";
             
             // Nilai Prosentase
-
+            $persen70 = $already70/$totalenrolledstudents*100;
+            $persen30 = $still30/$totalenrolledstudents*100;
 
             // End on nilai prosentase
-            
+
             // End of Hitung Completion
 
             // Membuat chart
 
             # $context = context_course::instance($courseid);
             $chart = new core\chart_bar();
-            $serie2 = new core\chart_series('Penyelesaian >70%', [22, 6, 9,20]);
-            $serie1 = new core\chart_series('Penyelesaian <30%', [65, 94, 80,71]);
+            $serie2 = new core\chart_series('Penyelesaian >70%', [$persen70]);
+            $serie1 = new core\chart_series('Penyelesaian <30%', [$persen30]);
             # $serie3 = new core\chart_series('Penugasan >90%', [16, 8.5,7.6,20.3 ]);
 
             $chart->set_title('Keterlibatan dan Keaktifan Peserta');
