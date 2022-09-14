@@ -106,7 +106,7 @@ class block_pintar_analytic extends block_base {
      * @return string
      */
     public function get_content() {
-    global $COURSE, $DB;
+    global $COURSE, $DB, $OUTPUT;
 
         // If content has already been generated, don't waste time generating it again.
         if ($this->content !== null) {
@@ -152,6 +152,8 @@ class block_pintar_analytic extends block_base {
                 $iscomplete = false;
                 foreach($activities as $activity){
                     $ccinfo = new completion_info($activity);
+                    // var_dump($ccinfo);
+                    // die();
                     $iscomplete = $ccinfo->is_course_complete($user->id);
                         // if($activity['timecompleted']!=0)$completed+=1;
                     if($iscomplete)$completed+=1;
