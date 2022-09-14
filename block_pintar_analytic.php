@@ -171,27 +171,32 @@ class block_pintar_analytic extends block_base {
             $this->content->text .= 'Diatas 70%:'.$already70."<br>";
             $this->content->text .= 'Dibawah 30%:'.$still30."<br>";
             
+            // Nilai Prosentase
+
+
+            // End on nilai prosentase
+            
             // End of Hitung Completion
 
-            // Membuat chart - masih belum bisa :(
+            // Membuat chart
 
             # $context = context_course::instance($courseid);
-            # $chart = new core\chart_bar();
-            # $serie1 = new core\chart_series('Penyelesaian <30%', [65, 94, 80,71]);
-            # $serie2 = new core\chart_series('Penyelesaian >70%', [22, 6, 9,20]);
+            $chart = new core\chart_bar();
+            $serie2 = new core\chart_series('Penyelesaian >70%', [22, 6, 9,20]);
+            $serie1 = new core\chart_series('Penyelesaian <30%', [65, 94, 80,71]);
             # $serie3 = new core\chart_series('Penugasan >90%', [16, 8.5,7.6,20.3 ]);
 
-            # $chart->set_title('Keterlibatan dan Keaktifan Peserta');
-            # $chart->add_series($serie1);
-            # $chart->add_series($serie2);
+            $chart->set_title('Keterlibatan dan Keaktifan Peserta');
+            $chart->add_series($serie1);
+            $chart->add_series($serie2);
             # $chart->add_series($serie3);
             # # $chart->add_series($serie4);
             # $chart->set_labels(['PTM Kepsek', 'PJJ-SMP', 'PJJ-SD', 'PJJ-Kepsek']);
             
             //Proses render nya masih mentok-tok
         
-            # $viewchart = $OUTPUT->render($chart);
-            # $this->content->text .= $viewchart;  
+            $viewchart = $OUTPUT->render($chart);
+            $this->content->text .= $viewchart;  
 
             // End of Membuat Chart
 
