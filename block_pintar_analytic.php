@@ -266,5 +266,43 @@ class block_pintar_analytic extends block_base {
         return true;
         
     }    
+
+    public static function custom_get_user_course_completion($courseid,$userid){
+        $course = get_course($courseid);
+        $user = core_user::get_user($userid, '*', MUST_EXIST);
+        core_user::require_active_user($user);
+
+        $completion = new completion_info($course);
+        $activities = $completion->get_activities();
+        $result = array();
+        foreach ($activities as $activity) {
+
+        $cmcompletion = \core_completion\cm_completion_details::get_instance($activity, $user->id);
+        $cmcompletiondetails = $cmcompletion->get_details();
+
+        $details = [];
+        foreach ($cmcompletiondetails as $rulename => $rulevalue) {
+            $details[] = [
+                'rulename' => $rulename,
+                'rulevalue' => (array)$rulevalue,
+            ];
+        }
+        $result[]=[
+            'state'         => $cmcompletion->get_overall_completion(),
+            'timecompleted' => $cmcompletion->get_timemodified(),
+            'overrideby'    => $cmcompletion->overridden_by(),
+            'hascompletion'    => $cmcompletion->has_completion(),
+            'isautomatic'      => $cmcompletion->is_automatic(),
+            'istrackeduser'    => $cmcompletion->is_tracked_user(),
+            'overallstatus'    => $cmcompletion->get_overall_completion(),
+            'details'          => $details,
+        ];
+    }
+    $results = array(
+        'statuses' => $result,
+    );
+    return $results;
+
+   }    
     
 }
