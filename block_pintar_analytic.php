@@ -141,8 +141,8 @@ class block_pintar_analytic extends block_base {
             $coursecontext = context_course::instance($courseid);
             $enrolledstudents = get_enrolled_users($coursecontext, 'moodle/course:isincompletionreports');
             $totalenrolledstudents = count($enrolledstudents);
-            $already70='';
-            $still30='';
+            $already70=0;
+            $still30=0;
             foreach ($enrolledstudents as $user) {
               //  $course_user_stat = core_completion_external::get_activities_completion_status($course->id,$user->id);
                 $course_user_stat = $this->custom_get_user_course_completion($courseid,$user->id);
