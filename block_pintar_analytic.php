@@ -106,6 +106,8 @@ class block_pintar_analytic extends block_base {
      * @return string
      */
     public function get_content() {
+    global $COURSE, $DB;
+
         // If content has already been generated, don't waste time generating it again.
         if ($this->content !== null) {
             return $this->content;
@@ -135,30 +137,60 @@ class block_pintar_analytic extends block_base {
 
             // Hitung completion
             $courseid = $COURSE->id;
+            $this->content->text .= 'Course id'.$courseid.'<br>';
             $coursecontext = context_course::instance($courseid);
             $enrolledstudents = get_enrolled_users($coursecontext, 'moodle/course:isincompletionreports');
+            $totalenrolledstudents = count($enrolledstudents);
             $already70='';
             $still30='';
             foreach ($enrolledstudents as $user) {
-                $course_user_stat = core_completion_external::get_activities_completion_status($course->id,$user->id);
-                $activities = $course_user_stat['statuses'];
+              //  $course_user_stat = core_completion_external::get_activities_completion_status($course->id,$user->id);
+              //  $activities = $course_user_stat['statuses'];
+                $activities = $DB->get_records('course_modules', array('course' => $courseid));
                 $totalactivities = count($activities);
                 $completed = 0;
+                $iscomplete = false;
                 foreach($activities as $activity){
-                        if($activity['timecompleted']!=0)$completed+=1;
+                    $ccinfo = new completion_info($activity);
+                    $iscomplete = $ccinfo->is_course_complete($user->id);
+                        // if($activity['timecompleted']!=0)$completed+=1;
+                    if($iscomplete)$completed+=1;
                 }
                 $studentcompletion=($completed/$totalactivities)*100;
-                if($studentcompletion>70)$already70+=1;
+                if($studentcompletion>69)$already70+=1;
                 else $still30 +=1;
 
             }
 
-            // End of Hitung Completion
-
+            
+            $this->content->text .= 'Total students:'.$totalenrolledstudents."<br>";
+            $this->content->text .= 'Total activities:'.$totalactivities."<br>";
             $this->content->text .= 'Diatas 70%:'.$already70."<br>";
             $this->content->text .= 'Dibawah 30%:'.$still30."<br>";
             
+            // End of Hitung Completion
 
+            // Membuat chart - masih belum bisa :(
+
+            # $context = context_course::instance($courseid);
+            # $chart = new core\chart_bar();
+            # $serie1 = new core\chart_series('Penyelesaian <30%', [65, 94, 80,71]);
+            # $serie2 = new core\chart_series('Penyelesaian >70%', [22, 6, 9,20]);
+            # $serie3 = new core\chart_series('Penugasan >90%', [16, 8.5,7.6,20.3 ]);
+
+            # $chart->set_title('Keterlibatan dan Keaktifan Peserta');
+            # $chart->add_series($serie1);
+            # $chart->add_series($serie2);
+            # $chart->add_series($serie3);
+            # # $chart->add_series($serie4);
+            # $chart->set_labels(['PTM Kepsek', 'PJJ-SMP', 'PJJ-SD', 'PJJ-Kepsek']);
+            
+            //Proses render nya masih mentok-tok
+        
+            # $viewchart = $OUTPUT->render($chart);
+            # $this->content->text .= $viewchart;  
+
+            // End of Membuat Chart
 
             // Gather content for block on regular course.
             // if (!$this->prepare_course_content($barinstances)) {
