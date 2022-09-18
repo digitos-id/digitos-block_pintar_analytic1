@@ -162,7 +162,7 @@ class block_pintar_analytic extends block_base {
                 if($totalactivities>0){
                     $studentcompletion=($completed/$totalactivities)*100;
                     } else {$studentcompletion=1;}
-                // $studentcompletion=($completed/$totalactivities)*100;
+                //  $studentcompletion=($completed/$totalactivities)*100;
                 if($studentcompletion>69)$already70+=1;
                 else $still30 +=1;
 
