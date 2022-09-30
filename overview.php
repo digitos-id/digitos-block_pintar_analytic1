@@ -24,7 +24,7 @@
  */
 
 // Include required files.
-// Setting dari Laptop
+// Setting dari Laptop - lagi
 require_once(dirname(__FILE__) . '/../../config.php');
 require_once($CFG->dirroot.'/notes/lib.php');
 require_once($CFG->libdir.'/tablelib.php');
